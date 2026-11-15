@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>National Assessments Results | SDO Romblon</title>
+<style>
+:root{--navy:#0E2747;--navy2:#17375F;--paper:#F6F5F0;--gold:#F2B63D;--blue:#1F5FA6;--coral:#C73E1D;--teal:#17776E;--line:#CAD3DD;--muted:#5B6A7E}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0a1a30;font-family:'Segoe UI',system-ui,Arial,sans-serif;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+.s{position:absolute;inset:0;padding:100px 120px 110px;display:none;flex-direction:column;gap:28px;background:var(--paper);color:var(--navy)}
+.s.on{display:flex}.s.dark{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+.eb{font-size:24px;letter-spacing:.16em;font-weight:700;color:var(--blue)}.dark .eb{color:var(--gold)}
+h1{font-size:92px;margin:0;line-height:1.05}h2{font-size:56px;margin:0;line-height:1.1}
+.lede{font-size:30px;color:var(--muted);margin:0}.dark .lede{color:#C9D6E8}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:20px}
+.k{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:34px}
+.k .n{font-size:100px;font-weight:800;color:var(--gold);line-height:1}.k .l{font-size:26px;color:#C9D6E8;margin-top:10px}
+.foot{position:absolute;left:120px;right:120px;bottom:40px;display:flex;justify-content:space-between;font-size:22px;color:var(--muted)}.dark .foot{color:#A9BBD3}
+.row{display:grid;grid-template-columns:480px 1fr 130px;gap:24px;align-items:center;font-size:34px;margin:22px 0}
+.row .t{height:52px;background:#E7ECF1;border-radius:8px;position:relative;overflow:hidden}
+.row .p{position:absolute;left:0;top:0;height:50%;background:#9DB6D3;border-radius:8px 8px 0 0}.row .q{position:absolute;left:0;top:50%;height:50%;background:var(--teal)}
+.row .v{font-weight:700;text-align:right}.row .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leg{display:flex;gap:30px;font-size:24px;color:var(--muted)}.leg i{display:inline-block;width:22px;height:22px;border-radius:5px;vertical-align:-4px;margin-right:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:50px;flex:1}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px}
+.card h3{margin:0 0 14px;font-size:34px}
+.hist{display:flex;align-items:flex-end;gap:18px;height:360px;margin-top:20px}.hist div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:24px;font-weight:700;height:100%}
+.hist b{display:block;width:100%;background:var(--blue);border-radius:10px 10px 0 0;min-height:4px}.hist span{font-size:22px;color:var(--muted);font-weight:400;margin-top:8px}
+ul.rec{margin:0;padding-left:34px;font-size:32px;line-height:1.5}ul.rec li{margin:12px 0}
+#nav{position:fixed;bottom:12px;right:14px;display:flex;gap:8px;z-index:9}#nav button{background:#ffffffcc;border:0;border-radius:8px;padding:8px 14px;font-size:16px;cursor:pointer}
+#st{position:fixed;left:14px;bottom:16px;color:#A9BBD3;font-size:14px;z-index:9}
+.hint{font-size:22px;color:var(--muted)}
+</style></head><body>
+<div id="stage"></div>
+<div id="st"></div>
+<div id="nav"><button onclick="go(-1)">◀</button><button onclick="go(1)">▶</button><button onclick="load()">Refresh</button><button onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">Full screen</button></div>
+<script>
+// ===== SETTINGS =====
+const ENDPOINT="https://script.google.com/macros/s/AKfycbx8HwE2Jwr5WdIsdvu2YWxvpXdx5Ip8jAq4-UH-tn9kX5qLE9jR_WT9t6mFL6p9yShNmw/exec";            // same Apps Script web app URL used in index.html
+const PASS=75;                // mastery line (%)
+const AUTO_REFRESH_SEC=30;
+// ===== ITEM LABELS (order matches the item bank, items 1-20) =====
+const LAB=["BEA full name","DO 55, s. 2016 as policy","Which result changes learner status","Who may register for PEPT","PEPT: below 75% in one subject","PEPT placement timing","PEPT registration rules","NAT grade levels","What NAT results show","ELLNA reporting","ELLNA languages","CB-NCAE purpose","CB-NCAE CORE-A model","CB-NCAE passing score","What PBTS is","PISA learners","PISA domains","SEA-PLM grade level","Stakes lens: ELLNA and NAT","“High-stakes” as a teaching lens"];
+const TOP={"Framework and policy":[1,2],"PEPT":[4,5,6,7],"NAT":[8,9],"ELLNA":[10,11],"CB-NCAE":[12,13,14],"PBTS, PISA, SEA-PLM":[15,16,17,18],"Stakes lens":[3,19,20]};
+const DEMO=new URLSearchParams(location.search).get("demo")==="1";
+let rows=[],cur=0,slides=[];
+const $=id=>document.getElementById(id);const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const f=x=>x==null?"–":Math.round(x)+"%";
+function parse(r){const m={};String(r.items||"").split(",").forEach(p=>{const [i,v]=p.split(":");if(i)m[+i]=+v});return {...r,pct:+r.percent,m}}
+function demoData(){const D=["Alcantara","Looc","Romblon","San Andres","Banton","Odiongan North"],R=["Teacher","School Head","Master Teacher","Testing Coordinator"],o=[];
+ for(let i=0;i<48;i++){const base=.45+Math.random()*.2,d=D[i%D.length],r=R[i%R.length];
+  ["Pretest","Posttest"].forEach((mo,k)=>{const m={};let c=0;for(let q=1;q<=20;q++){const p=Math.min(.97,base+(k?.28:0)-(q%5==0?.12:0)+(Math.random()-.5)*.2);m[q]=Math.random()<p?1:0;c+=m[q]}
+   if(k&&Math.random()<.3)return;o.push({mode:mo,name:"P"+i,district:d,role:r,school:"S"+i,score:c,total:20,percent:c*5,seconds:900,items:Object.keys(m).map(q=>q+":"+m[q]).join(",")})})}
+ return o}
+async function load(){
+ let d;
+ try{ if(DEMO||!ENDPOINT){d=demoData();$("st").textContent=DEMO||!ENDPOINT?"DEMO DATA (not real results)":""}
+  else{const r=await fetch(ENDPOINT+"?t="+Date.now());d=await r.json();$("st").textContent="Updated "+new Date().toLocaleTimeString()}}
+ catch(e){$("st").textContent="Could not load results: "+e.message;d=[]}
+ rows=d.map(parse);build();
+}
+const pre=()=>rows.filter(r=>r.mode==="Pretest"),post=()=>rows.filter(r=>r.mode==="Posttest");
+function itemPct(set,i){const a=set.filter(r=>i in r.m).map(r=>r.m[i]);return a.length?avg(a)*100:null}
+function topPct(set,ids){const a=[];set.forEach(r=>ids.forEach(i=>{if(i in r.m)a.push(r.m[i])}));return a.length?avg(a)*100:null}
+function bars(list){return list.map(x=>`<div class="row"><div class="nm">${x.n}</div><div class="t"><div class="p" style="width:${x.a||0}%"></div><div class="q" style="width:${x.b||0}%;top:50%"></div></div><div class="v">${f(x.b!=null?x.b:x.a)}</div></div>`).join("")}
+function barsSingle(list){return list.map(x=>`<div class="row"><div class="nm">${x.n}</div><div class="t"><div class="p" style="width:${x.a||0}%;height:100%;background:var(--blue)"></div></div><div class="v">${f(x.a)}</div></div>`).join("")}
+function slide(cls,html,n,t){return `<section class="s ${cls}">${html}<div class="foot"><span>SDO Romblon · Curriculum Implementation Division</span><span>${n} / ${t}</span></div></section>`}
+function build(){
+ const P=pre(),Q=post(),pm=avg(P.map(r=>r.pct)),qm=avg(Q.map(r=>r.pct));
+ const key=r=>(r.name+"|"+r.school).toLowerCase();const qmap={};Q.forEach(r=>qmap[key(r)]=r);
+ const pairs=P.filter(r=>qmap[key(r)]);const gain=pairs.length?avg(pairs.map(r=>qmap[key(r)].pct-r.pct)):null;
+ const tops=Object.entries(TOP).map(([n,ids])=>({n,a:topPct(P,ids),b:Q.length?topPct(Q,ids):null}));
+ const dist=[...new Set(rows.map(r=>r.district))].sort().map(n=>{const a=P.filter(r=>r.district===n),b=Q.filter(r=>r.district===n);return {n:`${n} (${a.length})`,a:avg(a.map(r=>r.pct)),b:b.length?avg(b.map(r=>r.pct)):null,cnt:a.length}});
+ const items=LAB.map((l,i)=>({n:l,a:itemPct(P,i+1)})).filter(x=>x.a!=null).sort((x,y)=>x.a-y.a);
+ const bands=[["0–39",0,39],["40–59",40,59],["60–74",60,74],["75–89",75,89],["90–100",90,100]].map(([l,a,b])=>({l,c:P.filter(r=>r.pct>=a&&r.pct<=b).length}));
+ const mx=Math.max(1,...bands.map(b=>b.c));
+ const roles=[...new Set(P.map(r=>r.role))].map(n=>{const a=P.filter(r=>r.role===n);return {n:`${n} (${a.length})`,a:avg(a.map(r=>r.pct))}});
+ const weak=tops.filter(t=>t.a!=null).sort((x,y)=>x.a-y.a);
+ const below=P.filter(r=>r.pct<PASS).length;
+ const hasPost=Q.length>0;const T=hasPost?7:6;let n=0;const S=[];
+ S.push(slide("dark",`<div class="eb">NATIONAL ASSESSMENTS TRAINING · RESULTS</div><h1>Where we stand,<br>and where to focus</h1><p class="lede">Diagnostic of ${P.length} participants across ${dist.length} districts${hasPost?`; posttest from ${Q.length}`:""}.</p>
+  <div class="kp"><div class="k"><div class="n">${P.length}</div><div class="l">Pretest takers</div></div><div class="k"><div class="n">${f(pm)}</div><div class="l">Mean pretest score</div></div><div class="k"><div class="n">${hasPost?f(qm):"–"}</div><div class="l">Mean posttest score</div></div><div class="k"><div class="n">${gain==null?"–":(gain>=0?"+":"")+Math.round(gain)}</div><div class="l">Average gain (points, ${pairs.length} matched)</div></div></div>`,++n,T));
+ S.push(slide("",`<div class="eb">HEADLINE</div><h2>${weak.length?`Weakest area: ${weak[0].n} (${f(weak[0].a)}). Strongest: ${weak[weak.length-1].n} (${f(weak[weak.length-1].a)}).`:"No data yet"}</h2><p class="lede">${below} of ${P.length} participants (${P.length?Math.round(below/P.length*100):0}%) scored below the ${PASS}% mastery line at pretest.</p>
+  <div class="leg"><span><i style="background:#9DB6D3"></i>Pretest</span><span><i style="background:var(--teal)"></i>Posttest</span></div><div class="card" style="flex:1">${bars(tops)}</div>`,++n,T));
+ S.push(slide("",`<div class="eb">BY DISTRICT</div><h2>Mean pretest score per district</h2><p class="lede">Number of participants in parentheses. Interpret small groups with care.</p><div class="card" style="flex:1;overflow:hidden">${bars(dist.map(d=>({...d,b:null})).map(d=>({n:d.n,a:d.a,b:null}))).replace(/<div class="q"[^>]*><\/div>/g,"")}</div>`,++n,T));
+ S.push(slide("",`<div class="eb">ITEM ANALYSIS</div><h2>Items that need the most attention</h2><div class="two"><div class="card"><h3>Lowest 6 (% correct)</h3>${barsSingle(items.slice(0,6))}</div><div class="card"><h3>Highest 4 (% correct)</h3>${barsSingle(items.slice(-4).reverse())}</div></div>`,++n,T));
+ S.push(slide("",`<div class="eb">DISTRIBUTION</div><h2>How scores are spread</h2><div class="two"><div class="card"><h3>Pretest score bands (% of 20 items)</h3><div class="hist">${bands.map(b=>`<div>${b.c}<b style="height:${b.c/mx*100*.8}%"></b><span>${b.l}</span></div>`).join("")}</div></div><div class="card"><h3>By position</h3>${barsSingle(roles)}</div></div>`,++n,T));
+ if(hasPost)S.push(slide("",`<div class="eb">LEARNING GAIN</div><h2>${gain==null?"Posttest in progress":`Matched participants improved by ${Math.round(gain)} points on average`}</h2><p class="lede">${pairs.length} participants have both a pretest and a posttest.</p><div class="card" style="flex:1">${bars(tops)}</div>`,++n,T));
+ S.push(slide("dark",`<div class="eb">RECOMMENDATIONS</div><h2>What the results suggest</h2><ul class="rec"><li>Spend the most discussion time on <b>${weak[0]?weak[0].n:"–"}</b>${weak[1]?` and <b>${weak[1].n}</b>`:""}.</li><li>Re-teach the lowest-scoring items first: ${items.slice(0,2).map(x=>"“"+x.n+"”").join("; ")||"–"}.</li><li>Give extra support to districts with the lowest mean scores.</li><li>Run the posttest with the same items to measure gain.</li><li>Before acting, confirm flagged facts (ELLNA grade level, CB-NCAE schedule) with the latest BEA memos.</li></ul>`,++n,T));
+ $("stage").innerHTML=S.join("");slides=[...document.querySelectorAll(".s")];cur=Math.min(cur,slides.length-1);show();
+}
+function show(){slides.forEach((s,i)=>s.classList.toggle("on",i===cur))}
+function go(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));show()}
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);$("stage").style.transform=`scale(${k}) translate(-50%,-50%)`;$("stage").style.left="50%";$("stage").style.top="50%";const st=$("stage").style;st.transformOrigin="0 0";st.marginLeft="0"}
+function fit2(){const k=Math.min(innerWidth/1920,innerHeight/1080);const st=$("stage");st.style.left=((innerWidth-1920*k)/2)+"px";st.style.top=((innerHeight-1080*k)/2)+"px";st.style.transform=`scale(${k})`}
+addEventListener("resize",fit2);fit2();
+addEventListener("keydown",e=>{if(["ArrowRight","PageDown"," "].includes(e.key))go(1);if(["ArrowLeft","PageUp"].includes(e.key))go(-1);if(e.key==="f")document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()});
+load();setInterval(load,AUTO_REFRESH_SEC*1000);
+</script></body></html>

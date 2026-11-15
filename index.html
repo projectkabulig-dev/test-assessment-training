@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>National Assessments Pretest | SDO Romblon</title>
+<style>
+:root{--navy:#0E2747;--navy2:#17375F;--paper:#F6F5F0;--gold:#F2B63D;--blue:#1F5FA6;--coral:#C73E1D;--teal:#17776E;--line:#CAD3DD;--muted:#5B6A7E}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--paper);color:var(--navy);line-height:1.5}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:22px 20px}
+header .in,main{max-width:860px;margin:auto}
+header small{color:var(--gold);letter-spacing:.12em;font-weight:700;font-size:12px}
+header h1{margin:4px 0 0;font-size:24px}
+main{padding:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(14,39,71,.06)}
+h2{margin:0 0 12px;font-size:20px}
+ol.steps{padding-left:20px;margin:0}ol.steps li{margin:8px 0}
+.pill{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;border-radius:99px;padding:3px 12px;font-size:13px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input,select{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--blue)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row{grid-template-columns:1fr}}
+button{background:var(--navy);color:#fff;border:0;border-radius:12px;padding:13px 24px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+button:hover{background:var(--blue)}button.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.hide{display:none}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 20px}
+.bar .in{max-width:860px;margin:auto;display:flex;align-items:center;gap:14px}
+.prog{flex:1;height:10px;background:#E7ECF1;border-radius:9px;overflow:hidden}.prog div{height:100%;background:var(--teal);width:0;transition:width .3s}
+#timer{font-weight:800;font-variant-numeric:tabular-nums;color:var(--navy)}#timer.low{color:var(--coral)}
+.q{font-size:19px;font-weight:600;margin-bottom:14px}.qn{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.08em;margin-bottom:6px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;margin:9px 0;cursor:pointer;background:#fff}
+.opt:hover{border-color:var(--blue)}.opt.sel{border-color:var(--blue);background:#EAF2FB}
+.opt b{background:var(--navy);color:#fff;border-radius:8px;min-width:28px;height:28px;display:grid;place-items:center;font-size:14px}
+.opt.ok{border-color:var(--teal);background:#E6F4F1}.opt.bad{border-color:var(--coral);background:#FCEAE5}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.score{font-size:72px;font-weight:800;line-height:1;color:var(--blue)}
+.exp{font-size:14px;color:var(--muted);margin-top:8px;border-left:4px solid var(--gold);padding-left:10px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.dots span{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;cursor:pointer;background:#fff}
+.dots span.a{background:var(--navy);color:#fff;border-color:var(--navy)}.dots span.c{outline:3px solid var(--gold)}
+.msg{font-size:14px;color:var(--muted)}
+</style></head><body>
+<header><div class="in"><small>SDO ROMBLON · CURRICULUM IMPLEMENTATION DIVISION</small><h1>National Assessments <span id="modeLbl">Pretest</span></h1></div></header>
+
+<div id="bar" class="bar hide"><div class="in"><span id="pc">1/20</span><div class="prog"><div id="pb"></div></div><span id="timer">25:00</span></div></div>
+
+<main>
+<section id="intro">
+ <div class="card"><span class="pill">START HERE · INSTRUCTIONS</span>
+  <h2 style="margin-top:12px">Before you begin</h2>
+  <ol class="steps">
+   <li>This test has <b>20 multiple-choice items</b> on the DepEd national assessments: PEPT, NAT, ELLNA, CB-NCAE, PBTS, PISA and SEA-PLM.</li>
+   <li>You have <b>25 minutes</b>. The timer starts when you press Start. When time runs out, your answers are submitted automatically.</li>
+   <li>Choose <b>one answer</b> per item. You may go back and change answers before you submit.</li>
+   <li>Items and choices appear in a <b>random order</b>. Do not use notes, slides or other devices.</li>
+   <li>After you submit, you will see your score and the correct answers with short explanations.</li>
+   <li>This is a diagnostic. It is not graded and does not affect your standing in the training.</li>
+  </ol></div>
+ <div class="card"><h2>Your details</h2>
+  <label>Full name</label><input id="name" autocomplete="name">
+  <div class="row"><div><label>Position</label><select id="role"><option value="">Select…</option><option>Teacher</option><option>Master Teacher</option><option>School Head</option><option>Testing Coordinator</option><option>District/Division Personnel</option><option>Other</option></select></div>
+  <div><label>District</label><select id="district"><option value="">Select district…</option></select></div></div>
+  <label>School / Office</label><select id="school" disabled><option value="">Select district first…</option></select>
+  <p class="msg" id="err" style="color:var(--coral)"></p>
+  <button id="go">Start the test</button></div>
+</section>
+
+<section id="test" class="hide">
+ <div class="card"><div class="qn" id="qn"></div><div class="q" id="qt"></div><div id="opts"></div>
+ <div class="nav"><button class="alt" id="prev">Back</button><button id="next">Next</button></div>
+ <div class="dots" id="dots"></div></div>
+</section>
+
+<section id="result" class="hide">
+ <div class="card" style="text-align:center"><div class="msg">Your score</div><div class="score" id="sc"></div><div id="sp" class="msg"></div><p class="msg" id="sent"></p>
+ <button class="alt" id="csv">Download my result (CSV)</button></div>
+ <div class="card"><h2>Review: correct answers</h2><div id="rev"></div></div>
+</section>
+</main>
+
+<script>
+// ===== SETTINGS =====
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbx8HwE2Jwr5WdIsdvu2YWxvpXdx5Ip8jAq4-UH-tn9kX5qLE9jR_WT9t6mFL6p9yShNmw/exec";   // paste your Google Apps Script web app URL here (see SETUP.txt)
+const MINUTES = 25;
+const MODE = new URLSearchParams(location.search).get("mode")==="post" ? "Posttest" : "Pretest";
+// ===== ITEM BANK (first option is correct; shuffled at run time) =====
+const BANK=[
+["What does BEA stand for in DepEd?",["Bureau of Education Assessment","Board of Examination Authority","Bureau of Elementary Achievement","Basic Education Accreditation"],"BEA runs the national assessments. Source: DO 55, s. 2016; DepEd memoranda."],
+["Which DepEd Order is the policy guideline on the National Assessment of Student Learning for K to 12?",["DO 55, s. 2016","DO 8, s. 2015","DO 42, s. 2016","DO 21, s. 2019"],"DO 55, s. 2016 sets the national assessment categories."],
+["Which of these assessments directly changes an individual learner's status (placement and certification)?",["PEPT","NAT","PISA","SEA-PLM"],"PEPT qualifiers are placed in a grade level and receive a Certificate of Rating. Source: DM 098, s. 2025."],
+["Who may register for the PEPT?",["Learners with incomplete or no record of formal schooling","Any Grade 6 learner who wants an early graduation","Only learners enrolled in public schools","Only learners aged 15"],"PEPT serves learners in special circumstances. Source: DM 098, s. 2025, para. 3."],
+["A PEPT test-taker scores below 75% in ONE subject only. What does DM 098, s. 2025 say?",["Retake that subtest within six months","Retake all subjects","The learner is placed one grade lower","The result is void and fees are refunded"],"Below 75% in one subject: retake that subtest. Below 75% in two or three subjects: retake all. Source: DM 098, s. 2025, paras. 18–19."],
+["When does the grade-level placement of PEPT qualifiers take effect?",["In the next or subsequent school year","Immediately after the test","At the start of the next quarter","Only after one year of tutoring"],"Placement is not in the year the test was taken. Source: DM 098, s. 2025."],
+["Which statement about PEPT registration is correct?",["No walk-in registration on test day, and no registration fee","Walk-in registration is allowed on test day","A registration fee is paid at the testing center","Registration is open only to teachers"],"Source: DM 098, s. 2025, paras. 5–11."],
+["The NAT is the exit assessment for which grade levels?",["Grades 6, 10 and 12","Grades 3, 6 and 9","Grades 4, 8 and 12","Grades 5, 9 and 11"],"Source: DO 55, s. 2016, para. 4."],
+["What do NAT results show?",["The percentage of learners reaching at least the minimum level of proficiency","Each learner's pass or fail for graduation","The learner's career interests","A ranking of countries"],"The reviewed sources describe NAT results as group-level data. Source: BEA NATG12 primer."],
+["How are ELLNA results reported under DO 55, s. 2016?",["As aggregate results at national, regional and division level","As an individual score report for every learner","As a pass or fail mark per learner","Only as a ranking of teachers"],"ELLNA results are aggregate, not per learner. Source: DO 55, s. 2016, Sec. 2."],
+["In which languages is ELLNA designed to be administered?",["English, Filipino and 19 Mother Tongue languages","English only","Filipino and English only","English, Filipino and Spanish"],"Source: DO 55, s. 2016, Sec. 2.3."],
+["What is the main purpose of the CB-NCAE?",["Career guidance and aptitude profiling","Grade-level placement","School-level comparison with PISA","Teacher licensure"],"Source: DM 108, s. 2025, para. 2."],
+["The CORE-A interest inventory in the CB-NCAE is based on which model?",["RIASEC","Bloom's taxonomy","Multiple intelligences","Webb's depth of knowledge"],"CORE-A is RIASEC-based; CORE-B uses a Thurstone-model inventory. Source: DM 108, s. 2025."],
+["According to DM 108, s. 2025, what is the passing score of the CB-NCAE?",["None is stated; it is used for guidance","75%","50%","85%"],"DM 108 describes career guidance and aptitude profiling and states no pass or fail rule."],
+["What is the PISA-based Test for Schools (PBTS)?",["An OECD assessment for individual schools whose results are comparable with PISA","A DepEd exit assessment for Grade 12","A regional assessment of Grade 5 learners","A career interest inventory"],"PBTS is also called PISA for Schools and reports to schools, not to individual learners. Source: OECD."],
+["PISA is run by the OECD every three years. Which learners take it?",["15-year-olds near the end of compulsory education","All Grade 10 learners","Grade 6 learners","Out-of-school youth and adults"],"Learners are selected at random within sampled schools. Source: OECD; DepEd."],
+["Which three domains does PISA assess?",["Reading, mathematics and science","Filipino, English and mathematics","Science, MAPEH and ICT","Reading, writing and civics"],"PISA applies these domains to real-life situations."],
+["SEA-PLM is a regional assessment by SEAMEO and UNICEF. Which grade does it assess?",["Grade 5","Grade 3","Grade 8","Grade 10"],"SEA-PLM covers Grade 5 reading, writing and mathematics. Source: UNICEF; SEAMEO."],
+["In the training's stakes lens, which classification fits ELLNA and NAT best?",["Low-stakes for learners: results describe groups","High-stakes: results decide promotion","Individual guidance: results decide a career","Certification: results give a Certificate of Rating"],"Results describe groups and guide monitoring and improvement."],
+["The term “high-stakes” in this training is best described as:",["A teaching lens, not official DepEd terminology","A category defined in DO 55, s. 2016","A rule that sets passing scores","A name for international assessments"],"DO 55, s. 2016 does not use the term. The lens follows what each result is used for."]
+];
+// ===== ENGINE =====
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const SCHOOLS={"Concepcion": ["Agbatang PS", "Bakhawan ES", "Calabasahan ES", "Concepcion CS", "Dalajican ES", "Masadya PS", "Masudsud ES", "Sampong ES", "San Vicente ES", "Concepcion NHS", "Bakhawan NHS"], "Alcantara": ["Agbay-Ang IS", "Alcantara CES", "Bagsik ES", "Bonlao ES", "Calagonsao ES", "Camili ES", "Comod-Om ES", "Don Manuel L. Solidum MES", "Felipe Madali MES", "Gui-ob ES", "San Isidro ES", "San Roque ES", "Alcantara NHS", "Tugdan ES", "Tugdan NHS", "Melodias Imperial Sr. NHS"], "Banton": ["Balogo ES", "Banice ES", "Banton CES", "Libtong ES", "Nasunogan ES", "Tan-ag ES", "Tumalum-Lagang ES", "Tungonan ES", "Banton NHS", "Tungonan NHS"], "Cajidiocan-Magdiwang": ["Agsao ES", "Agutay ES", "Ambulong ES", "Angel Rio ES", "Cajidiocan CES", "Camanglad ES", "Cambajao ES", "Cambalo ES", "Cambijang ES", "Cantagda ES", "Damaso Ramilo MES", "Danao ES", "Dulangan ES", "Gutivan ES", "Haguimit Cultural Minority School", "Ipil ES", "Jao-Asan ES", "Lumbang West ES", "Magdiwang ES", "Marigondon ES", "Panaguintingan ES", "Silum ES", "Taguilos ES", "Tampayan ES", "Tomas & Maria T. Maglaya MS", "Cajidiocan NHS", "Lumbang East NHS", "Cambalo NHS", "Danao NHS", "Magdiwang NHS", "Agutay NHS"], "Corcuera": ["Alegria ES", "Ambulong ES", "Colong-Colong ES", "Corcuera CES", "Gobon ES", "Ilijan ES", "Labnig ES", "Mabini ES", "Mahaba ES", "Mangansag ES", "San Roque ES", "San Vicente ES", "Tacasan ES", "Corcuera NHS", "Mabini NHS", "Mauricio F. Fabito NHS"], "Looc": ["Balatucan ES", "Buenavista ES", "Crispin Grimares ES", "Gov. Gonzales ES", "Guinhaya-An IS", "Jose M. Solis ES", "Limon Norte ES", "Limon Sur ES", "Looc CES", "Manhac ES", "Pili ES", "Punta ES", "Agojo IS", "Looc NHS", "Limon Norte NHS", "Buenavista NHS"], "Odiongan North": ["Aurora ES", "Boliganay ES", "Budiong ES", "Canduyong ES", "Canlumay Cultural CS", "Gabawan ES", "Libertad ES", "Odiongan North CS", "Palati PS", "Panique ES", "Pato-o IS", "Poctoy-Baito ES", "Tuburan ES", "Tumingad ES", "Libertad NHS", "Gabawan NHS"], "Odiongan South": ["Agnocnoc ES", "Amatong ES", "Bagulayag ES", "Bangon ES", "Bunsoran ES", "Claro M. Recto ES", "Ferrol CES", "Hinag-oman ES", "Malilico ES", "Mayha ES", "Odiongan South CES", "Paulino F. Fabon Sr. MS", "Progreso Este ES", "Progreso Oeste ES", "Rizal ES", "Tabobo-an ES", "Tubigon ES", "Tulay ES", "Anahao IS", "Ferrol NHS", "Odiongan NHS", "Mayha NHS"], "Romblon": ["Agbaluto ES", "Agnaga ES", "Agnay ES", "Agnipa ES", "Agpanabat ES", "Agtongo ES", "Alad Lamao ES", "Alad Recudo ES", "Bagacay ES", "Cajimos ES", "Calabogo ES", "Cobrador ES", "Cogon ES", "Ginablan ES", "Guimpingan ES", "Ilauran ES", "Lamao ES", "Li-O ES", "Logbon ES", "Lonos ES", "Lunas ES", "Maximino Mazo Motin ES", "Palje PS", "Romblon East CS", "Romblon West CS", "Sablayan ES", "San Jose ES", "Sawang ES", "Timla ES", "Agnipa NHS", "Macario Molina NHS", "Romblon NHS", "Alad NHS", "Sablayan NHS", "Li-O NHS"], "San Agustin-Santa Maria-Calatrava": ["Alfredo P. Navarette MS", "Balogo ES", "Bonga ES", "Buli ES", "Cabibihan ES", "Cabolutan ES", "Calatrava ES", "Camantaya ES", "Carmen ES", "Cawayan ES", "Concepcion Norte ES", "Concepcion Sur ES", "Doña Juana ES", "Esteban Minon Madrona ES", "Fetalvero-Mingoa MS", "Hinugusan ES", "Josefina Fetalino Malayo ES", "Linao ES", "Long Beach ES", "Luis M. Abello Sr. PS", "Pagsangahan ES", "Pang-Alaalang Paaralang Severina M. Solidum", "Paroyhog ES", "San Agustin CES", "Sto. Niño ES", "Sugod ES", "Talamban ES", "Esteban Madrona NHS", "Santa Maria NHS", "Sto. Nino NHS", "Cabolutan NHS", "Carmen NHS", "Victorio Sixon Balogo NHS", "Calatrava NHS", "Pascual Catajay Linao NHS", "San Agustin NTS", "Eduardo M. Moreno NHS", "Talisay IS"], "San Andres": ["Agpudlos ES", "Ben G. Talamisan MS", "Calunacon ES", "Dona Martina F. Ganan MS", "Geminiano Galicia Sr. MS", "Marigondon Sur ES", "Matutuna ES", "Nemesio N. Ganan III MS", "San Andres CES", "Tan-Agan ES", "Victoria ES", "San Andres NHS", "Linawan IS", "Marigondon Norte IS", "Tanagan NHS", "San Andres Cultural HS"], "San Fernando": ["Agtiwa ES", "Azagra ES", "Campalingo ES", "Canjalon ES", "España ES", "Layag Cultural Minority School", "Mabini ES", "Mabulo ES", "Otod ES", "San Fernando ES", "Taclobo ES", "Teresa Bernas MS", "Don Carlos MMMNHS", "Espana NHS", "Armin Rios-Marin NHS", "Azagra NHS"], "San Jose-Santa Fe": ["Agmanic ES", "Buenavista ES", "Busay ES", "Canyayo ES", "Combot ES", "Danao Sur ES", "Guinbirayan ES", "Guinpoingan ES", "Guintigbasan ES", "Inihawan ES", "Lamberto Antaran MS", "Lanas ES", "Magsaysay ES", "Mat-I ES", "Pandan ES", "Pinamihagan ES", "San Jose CS", "Santa Fe CES", "Silvino G. Gajarion ES", "Tabugon ES", "V. A. Gutierrez Montiel MES", "Agripino Armedilla NHS", "Guinbirayan NHS", "Sta. Fe NHS", "Trangquilino Cawaling Sr. NHS", "San Jose AHS", "Pinamihagan NHS", "Lindero IS", "Santa Fe Senior High School"]};
+const OTHER="Division Office / Other";
+(function(){const D=$("district"),S=$("school");
+ Object.keys(SCHOOLS).concat([OTHER]).forEach(k=>{const o=document.createElement("option");o.value=o.textContent=k;D.appendChild(o)});
+ D.onchange=()=>{S.innerHTML='<option value="">Select school…</option>';
+  const l=D.value===OTHER?[OTHER]:(SCHOOLS[D.value]||[]);
+  l.forEach(k=>{const o=document.createElement("option");o.value=o.textContent=k;S.appendChild(o)});
+  S.disabled=!D.value;if(D.value===OTHER){S.value=OTHER}};})();
+let items=[],ans=[],cur=0,t0=0,left=MINUTES*60,tick=null,done=false,info={},out={};
+$("modeLbl").textContent=MODE;
+$("go").onclick=()=>{
+ info={name:$("name").value.trim(),role:$("role").value,district:$("district").value,school:$("school").value};
+ if(!info.name||!info.role||!info.district||!info.school){$("err").textContent="Please complete all fields.";return}
+ items=shuf(BANK.map((b,id)=>({b,id}))).map(x=>({id:x.id,q:x.b[0],o:shuf(x.b[1].map((t,i)=>({t,ok:i===0}))),e:x.b[2]}));
+ ans=items.map(()=>-1);cur=0;t0=Date.now();
+ $("intro").classList.add("hide");$("test").classList.remove("hide");$("bar").classList.remove("hide");
+ tick=setInterval(()=>{left=MINUTES*60-Math.floor((Date.now()-t0)/1000);if(left<=0){left=0;submit()}
+  $("timer").textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0");$("timer").classList.toggle("low",left<=180)},500);
+ draw();
+};
+function draw(){
+ const it=items[cur];$("qn").textContent="ITEM "+(cur+1)+" OF "+items.length;$("qt").textContent=it.q;
+ $("opts").innerHTML="";
+ it.o.forEach((o,i)=>{const d=document.createElement("div");d.className="opt"+(ans[cur]===i?" sel":"");
+  d.innerHTML="<b>"+"ABCD"[i]+"</b><span></span>";d.lastChild.textContent=o.t;
+  d.onclick=()=>{ans[cur]=i;draw()};$("opts").appendChild(d)});
+ const n=ans.filter(a=>a>=0).length;$("pc").textContent=n+"/"+items.length+" answered";$("pb").style.width=(n/items.length*100)+"%";
+ $("prev").disabled=cur===0;$("next").textContent=cur===items.length-1?"Submit test":"Next";
+ $("dots").innerHTML="";items.forEach((_,i)=>{const s=document.createElement("span");s.textContent=i+1;s.className=(ans[i]>=0?"a ":"")+(i===cur?"c":"");s.onclick=()=>{cur=i;draw()};$("dots").appendChild(s)});
+}
+$("prev").onclick=()=>{if(cur>0){cur--;draw()}};
+$("next").onclick=()=>{if(cur<items.length-1){cur++;draw()}else{const m=ans.filter(a=>a<0).length;if(!m||confirm(m+" item(s) unanswered. Submit anyway?"))submit()}};
+function submit(){
+ if(done)return;done=true;clearInterval(tick);
+ const score=items.reduce((s,it,i)=>s+(ans[i]>=0&&it.o[ans[i]].ok?1:0),0);
+ const secs=Math.min(MINUTES*60,Math.floor((Date.now()-t0)/1000));
+ out={timestamp:new Date().toISOString(),mode:MODE,...info,score,total:items.length,percent:Math.round(score/items.length*100),seconds:secs,
+  items:items.slice().sort((a,b)=>a.id-b.id).map(it=>(it.id+1)+":"+(ans[items.indexOf(it)]>=0&&it.o[ans[items.indexOf(it)]].ok?1:0)).join(",")};
+ $("test").classList.add("hide");$("bar").classList.add("hide");$("result").classList.remove("hide");
+ $("sc").textContent=score+" / "+items.length;$("sp").textContent=out.percent+"%  ·  "+MODE;
+ $("rev").innerHTML="";
+ items.forEach((it,i)=>{const w=document.createElement("div");w.style.marginBottom="22px";
+  w.innerHTML='<div class="qn">ITEM '+(i+1)+(ans[i]>=0&&it.o[ans[i]].ok?" · CORRECT":(ans[i]<0?" · NO ANSWER":" · INCORRECT"))+'</div><div class="q"></div>';
+  w.querySelector(".q").textContent=it.q;
+  it.o.forEach((o,k)=>{const d=document.createElement("div");d.className="opt"+(o.ok?" ok":(ans[i]===k?" bad":""));d.style.cursor="default";d.innerHTML="<b>"+"ABCD"[k]+"</b><span></span>";d.lastChild.textContent=o.t;w.appendChild(d)});
+  const e=document.createElement("div");e.className="exp";e.textContent=it.e;w.appendChild(e);$("rev").appendChild(w)});
+ if(ENDPOINT){$("sent").textContent="Sending your result…";
+  fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(out)})
+  .then(()=>$("sent").textContent="Your result was submitted. Thank you.").catch(()=>$("sent").textContent="Could not send. Please download your result and give it to the facilitator.");
+ }else $("sent").textContent="Offline mode: please download your result and give it to the facilitator.";
+ window.scrollTo(0,0);
+}
+$("csv").onclick=()=>{const k=Object.keys(out);const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+ const blob=new Blob([k.join(",")+"\n"+k.map(x=>q(out[x])).join(",")],{type:"text/csv"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=MODE+"_"+(info.name||"result").replace(/\W+/g,"_")+".csv";a.click()};
+window.addEventListener("beforeunload",e=>{if(tick&&!done){e.preventDefault();e.returnValue=""}});
+</script></body></html>
