@@ -36,6 +36,8 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.dots span{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;cursor:pointer;background:#fff}
 .dots span.a{background:var(--navy);color:#fff;border-color:var(--navy)}.dots span.c{outline:3px solid var(--gold)}
 .msg{font-size:14px;color:var(--muted)}
+.dots2{display:flex;justify-content:center;gap:10px;margin:6px 0 20px}.dots2 i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots2 i.on{background:var(--navy);width:28px;border-radius:6px}
+.step{animation:in .3s ease}@keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 </style></head><body>
 <header><div class="in"><small>SDO ROMBLON · CURRICULUM IMPLEMENTATION DIVISION</small><h1>National Assessments <span id="modeLbl">Pretest</span></h1></div></header>
 
@@ -43,7 +45,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 
 <main>
 <section id="intro">
- <div class="card"><span class="pill">START HERE · INSTRUCTIONS</span>
+ <div class="card step" id="c1"><span class="pill">START HERE · INSTRUCTIONS</span>
   <h2 style="margin-top:12px">Before you begin</h2>
   <ol class="steps">
    <li>This test has <b>20 multiple-choice items</b> on the DepEd national assessments: PEPT, NAT, ELLNA, CB-NCAE, PBTS, PISA and SEA-PLM.</li>
@@ -52,14 +54,17 @@ button:disabled{opacity:.5;cursor:not-allowed}
    <li>Items and choices appear in a <b>random order</b>. Do not use notes, slides or other devices.</li>
    <li>After you submit, you will see your score and the correct answers with short explanations.</li>
    <li>This is a diagnostic. It is not graded and does not affect your standing in the training.</li>
-  </ol></div>
- <div class="card"><h2>Your details</h2>
+  </ol>
+  <p class="msg" style="margin-top:14px">Swipe left or press Next to continue.</p>
+  <button id="nx1">Next: your details →</button></div>
+ <div class="card step hide" id="c2"><h2>Your details</h2>
   <label>Full name</label><input id="name" autocomplete="name">
   <div class="row"><div><label>Position</label><select id="role"><option value="">Select…</option><option>Teacher</option><option>Master Teacher</option><option>School Head</option><option>Testing Coordinator</option><option>District/Division Personnel</option><option>Other</option></select></div>
   <div><label>District</label><select id="district"><option value="">Select district…</option></select></div></div>
   <label>School / Office</label><select id="school" disabled><option value="">Select district first…</option></select>
   <p class="msg" id="err" style="color:var(--coral)"></p>
-  <button id="go">Start the test</button></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="alt" id="bk2" type="button">← Back</button><button id="go">Start the test</button></div></div>
+ <div class="dots2"><i class="on"></i><i></i></div>
 </section>
 
 <section id="test" class="hide">
@@ -70,7 +75,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 
 <section id="result" class="hide">
  <div class="card" style="text-align:center"><div class="msg">Your score</div><div class="score" id="sc"></div><div id="sp" class="msg"></div><p class="msg" id="sent"></p>
- <button class="alt" id="csv">Download my result (CSV)</button></div>
+ <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px"><button id="home">Back to start</button><button class="alt" id="csv">Download my result (CSV)</button></div></div>
  <div class="card"><h2>Review: correct answers</h2><div id="rev"></div></div>
 </section>
 </main>
@@ -116,6 +121,14 @@ const OTHER="Division Office / Other";
   S.disabled=!D.value;if(D.value===OTHER){S.value=OTHER}};})();
 let items=[],ans=[],cur=0,t0=0,left=MINUTES*60,tick=null,done=false,info={},out={};
 $("modeLbl").textContent=MODE;
+
+function step(n){$("c1").classList.toggle("hide",n!==1);$("c2").classList.toggle("hide",n!==2);
+ document.querySelectorAll(".dots2 i").forEach((d,i)=>d.classList.toggle("on",i===n-1));window.scrollTo(0,0)}
+$("nx1").onclick=()=>step(2);$("bk2").onclick=()=>step(1);
+(function(){let x0=null,y0=null;const el=$("intro");
+ el.addEventListener("touchstart",e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+ el.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)step(2);else step(1)}},{passive:true});})();
 $("go").onclick=()=>{
  info={name:$("name").value.trim(),role:$("role").value,district:$("district").value,school:$("school").value};
  if(!info.name||!info.role||!info.district||!info.school){$("err").textContent="Please complete all fields.";return}
@@ -158,6 +171,7 @@ function submit(){
  }else $("sent").textContent="Offline mode: please download your result and give it to the facilitator.";
  window.scrollTo(0,0);
 }
+$("home").onclick=()=>location.href=location.pathname+(MODE==="Posttest"?"?mode=post":"");
 $("csv").onclick=()=>{const k=Object.keys(out);const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
  const blob=new Blob([k.join(",")+"\n"+k.map(x=>q(out[x])).join(",")],{type:"text/csv"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=MODE+"_"+(info.name||"result").replace(/\W+/g,"_")+".csv";a.click()};
