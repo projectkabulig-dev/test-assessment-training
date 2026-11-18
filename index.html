@@ -21,7 +21,7 @@ button{background:var(--navy);color:#fff;border:0;border-radius:12px;padding:13p
 button:hover{background:var(--blue)}button.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
 button:disabled{opacity:.5;cursor:not-allowed}
 .hide{display:none}
-.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 20px}
+.bar{position:sticky;top:64px;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 20px}
 .bar .in{max-width:860px;margin:auto;display:flex;align-items:center;gap:14px}
 .prog{flex:1;height:10px;background:#E7ECF1;border-radius:9px;overflow:hidden}.prog div{height:100%;background:var(--teal);width:0;transition:width .3s}
 #timer{font-weight:800;font-variant-numeric:tabular-nums;color:var(--navy)}#timer.low{color:var(--coral)}
@@ -38,8 +38,18 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .msg{font-size:14px;color:var(--muted)}
 .dots2{display:flex;justify-content:center;gap:10px;margin:6px 0 20px}.dots2 i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots2 i.on{background:var(--navy);width:28px;border-radius:6px}
 .step{animation:in .3s ease}@keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+
+.top{position:sticky;top:0;z-index:8;height:64px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 16px}
+.top .ttl{flex:1;min-width:0}.top .ttl b{display:block;font-size:17px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top .ttl small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .pillbtn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);border:1.5px solid var(--line);border-radius:99px;padding:9px 16px;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit;line-height:1.2}
+.top .pillbtn:hover{background:#EAF2FB;border-color:var(--blue)}.top .pillbtn svg{width:18px;height:18px;flex:none}
+.live{display:inline-flex;align-items:center;gap:7px;background:#DDF6E7;color:#15663A;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:800;letter-spacing:.03em;white-space:nowrap}.live i{width:8px;height:8px;border-radius:50%;background:#1DB954;animation:pl 1.4s infinite}@keyframes pl{50%{opacity:.25}}
+@media(max-width:640px){.top .ttl small,.top .pillbtn span{display:none}.top .pillbtn{padding:9px 11px}.live{padding:7px 10px;font-size:11px}}
+.lv{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 4px}@media(max-width:600px){.lv{grid-template-columns:1fr}}
+.lvc{border:2px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;background:#fff;color:var(--navy)}
+.lvc b{display:block;font-size:20px;margin-bottom:4px}.lvc span{color:var(--muted);font-size:14px}.lvc:hover{border-color:var(--blue)}.lvc.sel{border-color:var(--blue);background:#EAF2FB}
 </style></head><body>
-<header><div class="in"><small>SDO ROMBLON · CURRICULUM IMPLEMENTATION DIVISION</small><h1>National Assessments <span id="modeLbl">Pretest</span></h1></div></header>
+<div class="top"><button class="pillbtn" id="homeBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></button><div class="ttl"><b>National Assessments <span id="modeLbl">Pretest</span><span id="lvLbl"></span></b><small>SDO Romblon · Curriculum Implementation Division</small></div><a class="pillbtn" id="dashBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg><span>Dashboard</span></a><span class="live"><i></i>LIVE · Google Sheet</span></div>
 
 <div id="bar" class="bar hide"><div class="in"><span id="pc">1/20</span><div class="prog"><div id="pb"></div></div><span id="timer">25:00</span></div></div>
 
@@ -50,21 +60,28 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <ol class="steps">
    <li>This test has <b>20 multiple-choice items</b> on the DepEd national assessments: PEPT, NAT, ELLNA, CB-NCAE, PBTS, PISA and SEA-PLM.</li>
    <li>You have <b>25 minutes</b>. The timer starts when you press Start. When time runs out, your answers are submitted automatically.</li>
+   <li>Choose your <b>level (Elementary or Secondary)</b> and enter the <b>access code</b> given by the facilitator.</li>
    <li>Choose <b>one answer</b> per item. You may go back and change answers before you submit.</li>
    <li>Items and choices appear in a <b>random order</b>. Do not use notes, slides or other devices.</li>
    <li>After you submit, you will see your score and the correct answers with short explanations.</li>
    <li>This is a diagnostic. It is not graded and does not affect your standing in the training.</li>
   </ol>
   <p class="msg" style="margin-top:14px">Swipe left or press Next to continue.</p>
-  <button id="nx1">Next: your details →</button></div>
- <div class="card step hide" id="c2"><h2>Your details</h2>
+  <button id="nx1">Next: log in →</button></div>
+ <div class="card step hide" id="c2"><h2>Log in</h2>
+  <p class="msg">Choose your level, then enter the access code given by the facilitator.</p>
+  <div class="lv"><div class="lvc" id="lvE" tabindex="0" role="button"><b>Elementary</b><span>Elementary and integrated schools</span></div><div class="lvc" id="lvS" tabindex="0" role="button"><b>Secondary</b><span>Junior and senior high schools</span></div></div>
+  <label>Access code</label><input id="code" autocomplete="off" autocapitalize="characters" placeholder="Access code">
+  <p class="msg" id="err2" style="color:var(--coral)"></p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="alt" id="bk1" type="button">← Back</button><button id="nx2" type="button">Continue →</button></div></div>
+ <div class="card step hide" id="c3"><h2>Your details</h2>
   <label>Full name</label><input id="name" autocomplete="name">
   <div class="row"><div><label>Position</label><select id="role"><option value="">Select…</option><option>Teacher</option><option>Master Teacher</option><option>School Head</option><option>Testing Coordinator</option><option>District/Division Personnel</option><option>Other</option></select></div>
   <div><label>District</label><select id="district"><option value="">Select district…</option></select></div></div>
   <label>School / Office</label><select id="school" disabled><option value="">Select district first…</option></select>
   <p class="msg" id="err" style="color:var(--coral)"></p>
   <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="alt" id="bk2" type="button">← Back</button><button id="go">Start the test</button></div></div>
- <div class="dots2"><i class="on"></i><i></i></div>
+ <div class="dots2"><i class="on"></i><i></i><i></i></div>
 </section>
 
 <section id="test" class="hide">
@@ -84,6 +101,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 // ===== SETTINGS =====
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbx8HwE2Jwr5WdIsdvu2YWxvpXdx5Ip8jAq4-UH-tn9kX5qLE9jR_WT9t6mFL6p9yShNmw/exec";   // paste your Google Apps Script web app URL here (see SETUP.txt)
 const MINUTES = 25;
+const CODES = {Elementary:"ELEM-2026", Secondary:"SEC-2026"};   // CHANGE THESE: access codes for each level
 const MODE = new URLSearchParams(location.search).get("mode")==="post" ? "Posttest" : "Pretest";
 // ===== ITEM BANK (first option is correct; shuffled at run time) =====
 const BANK=[
@@ -113,24 +131,39 @@ const $=id=>document.getElementById(id);
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const SCHOOLS={"Concepcion": ["Agbatang PS", "Bakhawan ES", "Calabasahan ES", "Concepcion CS", "Dalajican ES", "Masadya PS", "Masudsud ES", "Sampong ES", "San Vicente ES", "Concepcion NHS", "Bakhawan NHS"], "Alcantara": ["Agbay-Ang IS", "Alcantara CES", "Bagsik ES", "Bonlao ES", "Calagonsao ES", "Camili ES", "Comod-Om ES", "Don Manuel L. Solidum MES", "Felipe Madali MES", "Gui-ob ES", "San Isidro ES", "San Roque ES", "Alcantara NHS", "Tugdan ES", "Tugdan NHS", "Melodias Imperial Sr. NHS"], "Banton": ["Balogo ES", "Banice ES", "Banton CES", "Libtong ES", "Nasunogan ES", "Tan-ag ES", "Tumalum-Lagang ES", "Tungonan ES", "Banton NHS", "Tungonan NHS"], "Cajidiocan-Magdiwang": ["Agsao ES", "Agutay ES", "Ambulong ES", "Angel Rio ES", "Cajidiocan CES", "Camanglad ES", "Cambajao ES", "Cambalo ES", "Cambijang ES", "Cantagda ES", "Damaso Ramilo MES", "Danao ES", "Dulangan ES", "Gutivan ES", "Haguimit Cultural Minority School", "Ipil ES", "Jao-Asan ES", "Lumbang West ES", "Magdiwang ES", "Marigondon ES", "Panaguintingan ES", "Silum ES", "Taguilos ES", "Tampayan ES", "Tomas & Maria T. Maglaya MS", "Cajidiocan NHS", "Lumbang East NHS", "Cambalo NHS", "Danao NHS", "Magdiwang NHS", "Agutay NHS"], "Corcuera": ["Alegria ES", "Ambulong ES", "Colong-Colong ES", "Corcuera CES", "Gobon ES", "Ilijan ES", "Labnig ES", "Mabini ES", "Mahaba ES", "Mangansag ES", "San Roque ES", "San Vicente ES", "Tacasan ES", "Corcuera NHS", "Mabini NHS", "Mauricio F. Fabito NHS"], "Looc": ["Balatucan ES", "Buenavista ES", "Crispin Grimares ES", "Gov. Gonzales ES", "Guinhaya-An IS", "Jose M. Solis ES", "Limon Norte ES", "Limon Sur ES", "Looc CES", "Manhac ES", "Pili ES", "Punta ES", "Agojo IS", "Looc NHS", "Limon Norte NHS", "Buenavista NHS"], "Odiongan North": ["Aurora ES", "Boliganay ES", "Budiong ES", "Canduyong ES", "Canlumay Cultural CS", "Gabawan ES", "Libertad ES", "Odiongan North CS", "Palati PS", "Panique ES", "Pato-o IS", "Poctoy-Baito ES", "Tuburan ES", "Tumingad ES", "Libertad NHS", "Gabawan NHS"], "Odiongan South": ["Agnocnoc ES", "Amatong ES", "Bagulayag ES", "Bangon ES", "Bunsoran ES", "Claro M. Recto ES", "Ferrol CES", "Hinag-oman ES", "Malilico ES", "Mayha ES", "Odiongan South CES", "Paulino F. Fabon Sr. MS", "Progreso Este ES", "Progreso Oeste ES", "Rizal ES", "Tabobo-an ES", "Tubigon ES", "Tulay ES", "Anahao IS", "Ferrol NHS", "Odiongan NHS", "Mayha NHS"], "Romblon": ["Agbaluto ES", "Agnaga ES", "Agnay ES", "Agnipa ES", "Agpanabat ES", "Agtongo ES", "Alad Lamao ES", "Alad Recudo ES", "Bagacay ES", "Cajimos ES", "Calabogo ES", "Cobrador ES", "Cogon ES", "Ginablan ES", "Guimpingan ES", "Ilauran ES", "Lamao ES", "Li-O ES", "Logbon ES", "Lonos ES", "Lunas ES", "Maximino Mazo Motin ES", "Palje PS", "Romblon East CS", "Romblon West CS", "Sablayan ES", "San Jose ES", "Sawang ES", "Timla ES", "Agnipa NHS", "Macario Molina NHS", "Romblon NHS", "Alad NHS", "Sablayan NHS", "Li-O NHS"], "San Agustin-Santa Maria-Calatrava": ["Alfredo P. Navarette MS", "Balogo ES", "Bonga ES", "Buli ES", "Cabibihan ES", "Cabolutan ES", "Calatrava ES", "Camantaya ES", "Carmen ES", "Cawayan ES", "Concepcion Norte ES", "Concepcion Sur ES", "Doña Juana ES", "Esteban Minon Madrona ES", "Fetalvero-Mingoa MS", "Hinugusan ES", "Josefina Fetalino Malayo ES", "Linao ES", "Long Beach ES", "Luis M. Abello Sr. PS", "Pagsangahan ES", "Pang-Alaalang Paaralang Severina M. Solidum", "Paroyhog ES", "San Agustin CES", "Sto. Niño ES", "Sugod ES", "Talamban ES", "Esteban Madrona NHS", "Santa Maria NHS", "Sto. Nino NHS", "Cabolutan NHS", "Carmen NHS", "Victorio Sixon Balogo NHS", "Calatrava NHS", "Pascual Catajay Linao NHS", "San Agustin NTS", "Eduardo M. Moreno NHS", "Talisay IS"], "San Andres": ["Agpudlos ES", "Ben G. Talamisan MS", "Calunacon ES", "Dona Martina F. Ganan MS", "Geminiano Galicia Sr. MS", "Marigondon Sur ES", "Matutuna ES", "Nemesio N. Ganan III MS", "San Andres CES", "Tan-Agan ES", "Victoria ES", "San Andres NHS", "Linawan IS", "Marigondon Norte IS", "Tanagan NHS", "San Andres Cultural HS"], "San Fernando": ["Agtiwa ES", "Azagra ES", "Campalingo ES", "Canjalon ES", "España ES", "Layag Cultural Minority School", "Mabini ES", "Mabulo ES", "Otod ES", "San Fernando ES", "Taclobo ES", "Teresa Bernas MS", "Don Carlos MMMNHS", "Espana NHS", "Armin Rios-Marin NHS", "Azagra NHS"], "San Jose-Santa Fe": ["Agmanic ES", "Buenavista ES", "Busay ES", "Canyayo ES", "Combot ES", "Danao Sur ES", "Guinbirayan ES", "Guinpoingan ES", "Guintigbasan ES", "Inihawan ES", "Lamberto Antaran MS", "Lanas ES", "Magsaysay ES", "Mat-I ES", "Pandan ES", "Pinamihagan ES", "San Jose CS", "Santa Fe CES", "Silvino G. Gajarion ES", "Tabugon ES", "V. A. Gutierrez Montiel MES", "Agripino Armedilla NHS", "Guinbirayan NHS", "Sta. Fe NHS", "Trangquilino Cawaling Sr. NHS", "San Jose AHS", "Pinamihagan NHS", "Lindero IS", "Santa Fe Senior High School"]};
 const OTHER="Division Office / Other";
+let LEVEL="";
+function levelOf(n){if(/(NHS|NTS|AHS|\bHS|Senior High School)$/.test(n))return "Secondary";if(/\bIS$/.test(n))return "Both";return "Elementary"}
 (function(){const D=$("district"),S=$("school");
  Object.keys(SCHOOLS).concat([OTHER]).forEach(k=>{const o=document.createElement("option");o.value=o.textContent=k;D.appendChild(o)});
  D.onchange=()=>{S.innerHTML='<option value="">Select school…</option>';
-  const l=D.value===OTHER?[OTHER]:(SCHOOLS[D.value]||[]);
+  const l=D.value===OTHER?[OTHER]:(SCHOOLS[D.value]||[]).filter(k=>{const v=levelOf(k);return v==="Both"||v===LEVEL});
   l.forEach(k=>{const o=document.createElement("option");o.value=o.textContent=k;S.appendChild(o)});
   S.disabled=!D.value;if(D.value===OTHER){S.value=OTHER}};})();
 let items=[],ans=[],cur=0,t0=0,left=MINUTES*60,tick=null,done=false,info={},out={};
 $("modeLbl").textContent=MODE;
 
-function step(n){$("c1").classList.toggle("hide",n!==1);$("c2").classList.toggle("hide",n!==2);
+let curStep=1,selLv="";
+function step(n){curStep=n;["c1","c2","c3"].forEach((id,i)=>$(id).classList.toggle("hide",i+1!==n));
  document.querySelectorAll(".dots2 i").forEach((d,i)=>d.classList.toggle("on",i===n-1));window.scrollTo(0,0)}
-$("nx1").onclick=()=>step(2);$("bk2").onclick=()=>step(1);
+function pick(lv){selLv=lv;$("lvE").classList.toggle("sel",lv==="Elementary");$("lvS").classList.toggle("sel",lv==="Secondary");$("err2").textContent=""}
+$("lvE").onclick=()=>pick("Elementary");$("lvS").onclick=()=>pick("Secondary");
+["lvE","lvS"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();$(id).click()}}));
+function login(){
+ if(!selLv){$("err2").textContent="Please choose your level.";return}
+ if($("code").value.trim().toUpperCase()!==CODES[selLv].toUpperCase()){$("err2").textContent="Wrong access code for "+selLv+". Ask the facilitator.";return}
+ if(LEVEL!==selLv){LEVEL=selLv;$("district").value="";$("district").onchange()}
+ $("lvLbl").textContent=" · "+LEVEL;$("err2").textContent="";step(3)}
+$("nx1").onclick=()=>step(2);$("bk1").onclick=()=>step(1);$("nx2").onclick=login;$("bk2").onclick=()=>step(2);
+$("code").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+(function(){const q=(new URLSearchParams(location.search).get("level")||"").toLowerCase();if(q==="elementary")pick("Elementary");if(q==="secondary")pick("Secondary")})();
+if(ENDPOINT){$("dashBtn").href=ENDPOINT+(ENDPOINT.indexOf("?")>-1?"&":"?")+"page=results"}else $("dashBtn").style.display="none";
+$("homeBtn").onclick=()=>{if(tick&&!done){if(!confirm("Leave the test? Your answers will be lost."))return;done=true;clearInterval(tick)}location.href=location.pathname+(MODE==="Posttest"?"?mode=post":"")};
 (function(){let x0=null,y0=null;const el=$("intro");
  el.addEventListener("touchstart",e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
  el.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
-  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)step(2);else step(1)}},{passive:true});})();
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0){if(curStep===1)step(2)}else if(curStep>1)step(curStep-1)}},{passive:true});})();
 $("go").onclick=()=>{
- info={name:$("name").value.trim(),role:$("role").value,district:$("district").value,school:$("school").value};
+ info={name:$("name").value.trim(),role:$("role").value,district:$("district").value,school:$("school").value,level:LEVEL};
  if(!info.name||!info.role||!info.district||!info.school){$("err").textContent="Please complete all fields.";return}
  items=shuf(BANK.map((b,id)=>({b,id}))).map(x=>({id:x.id,q:x.b[0],o:shuf(x.b[1].map((t,i)=>({t,ok:i===0}))),e:x.b[2]}));
  ans=items.map(()=>-1);cur=0;t0=Date.now();
@@ -158,7 +191,7 @@ function submit(){
  out={timestamp:new Date().toISOString(),mode:MODE,...info,score,total:items.length,percent:Math.round(score/items.length*100),seconds:secs,
   items:items.slice().sort((a,b)=>a.id-b.id).map(it=>(it.id+1)+":"+(ans[items.indexOf(it)]>=0&&it.o[ans[items.indexOf(it)]].ok?1:0)).join(",")};
  $("test").classList.add("hide");$("bar").classList.add("hide");$("result").classList.remove("hide");
- $("sc").textContent=score+" / "+items.length;$("sp").textContent=out.percent+"%  ·  "+MODE;
+ $("sc").textContent=score+" / "+items.length;$("sp").textContent=out.percent+"%  ·  "+LEVEL+"  ·  "+MODE;
  $("rev").innerHTML="";
  items.forEach((it,i)=>{const w=document.createElement("div");w.style.marginBottom="22px";
   w.innerHTML='<div class="qn">ITEM '+(i+1)+(ans[i]>=0&&it.o[ans[i]].ok?" · CORRECT":(ans[i]<0?" · NO ANSWER":" · INCORRECT"))+'</div><div class="q"></div>';
