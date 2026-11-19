@@ -43,13 +43,32 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .top .ttl{flex:1;min-width:0}.top .ttl b{display:block;font-size:17px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top .ttl small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top .pillbtn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);border:1.5px solid var(--line);border-radius:99px;padding:9px 16px;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit;line-height:1.2}
 .top .pillbtn:hover{background:#EAF2FB;border-color:var(--blue)}.top .pillbtn svg{width:18px;height:18px;flex:none}
-.live{display:inline-flex;align-items:center;gap:7px;background:#DDF6E7;color:#15663A;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:800;letter-spacing:.03em;white-space:nowrap}.live i{width:8px;height:8px;border-radius:50%;background:#1DB954;animation:pl 1.4s infinite}@keyframes pl{50%{opacity:.25}}
+.live{text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;background:#DDF6E7;color:#15663A;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:800;letter-spacing:.03em;white-space:nowrap}.live i{width:8px;height:8px;border-radius:50%;background:#1DB954;animation:pl 1.4s infinite}@keyframes pl{50%{opacity:.25}}
 @media(max-width:640px){.top .ttl small,.top .pillbtn span{display:none}.top .pillbtn{padding:9px 11px}.live{padding:7px 10px;font-size:11px}}
 .lv{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 4px}@media(max-width:600px){.lv{grid-template-columns:1fr}}
 .lvc{border:2px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;background:#fff;color:var(--navy)}
 .lvc b{display:block;font-size:20px;margin-bottom:4px}.lvc span{color:var(--muted);font-size:14px}.lvc:hover{border-color:var(--blue)}.lvc.sel{border-color:var(--blue);background:#EAF2FB}
+
+#dash{padding:18px 16px 50px}.dw{max-width:1100px;margin:auto}
+.dt{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.tabs{display:flex;gap:4px;background:#E7ECF1;border-radius:99px;padding:3px}
+.tabs button{background:transparent;color:var(--muted);border-radius:99px;padding:8px 16px;font-size:14px}.tabs button:hover{background:#D5DDE7}
+.tabs button.on,.tabs button.on:hover{background:var(--navy);color:#fff}
+.chips{margin-left:auto;font-size:14px;color:var(--muted)}.chips b{color:var(--blue);font-size:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}@media(max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.kpi .n{font-size:40px;font-weight:800;color:var(--blue);line-height:1.1}.kpi .l{font-size:13px;color:var(--muted);margin-top:4px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:800px){.g2{grid-template-columns:1fr}}
+.br{display:grid;grid-template-columns:minmax(110px,38%) 1fr 56px;gap:10px;align-items:center;margin:9px 0;font-size:14px}
+.br.cmpr{grid-template-columns:minmax(110px,32%) 1fr 120px}.br .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.br .v{font-weight:800;text-align:right}
+.br .t{height:20px;background:#E7ECF1;border-radius:6px;position:relative;overflow:hidden}.br .t i{position:absolute;left:0;display:block}
+.br .t .a{top:0;height:50%;background:#9DB6D3}.br .t .b{top:50%;height:50%;background:var(--teal)}.br.one .t .a{height:100%;background:var(--blue)}.br.red .t .a{background:var(--coral)}.br.grn .t .a{background:var(--teal)}
+.leg{display:flex;gap:18px;font-size:13px;color:var(--muted);margin:0 0 6px}.leg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
+.pt{width:100%;border-collapse:collapse;font-size:14px}.pt th,.pt td{padding:7px 8px;border-bottom:1px solid #E7ECF1;text-align:center}.pt th{font-size:12px;letter-spacing:.06em;color:var(--muted)}.pt td:first-child,.pt th:first-child{text-align:left}.pt .z{color:var(--coral);font-weight:700}
+.hs{display:flex;align-items:flex-end;gap:12px;height:170px;margin-top:8px}.hs div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-weight:800;font-size:14px;height:100%}.hs b{display:block;width:100%;background:var(--blue);border-radius:8px 8px 0 0;min-height:3px}.hs span{font-size:12px;color:var(--muted);font-weight:400;margin-top:6px}
+.dlock{max-width:420px;margin:30px auto;text-align:center}.dlock input{text-align:center;letter-spacing:.3em;font-size:20px}
+.foc li{margin:7px 0}
 </style></head><body>
-<div class="top"><button class="pillbtn" id="homeBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></button><div class="ttl"><b>National Assessments <span id="modeLbl">Pretest</span><span id="lvLbl"></span></b><small>SDO Romblon · Curriculum Implementation Division</small></div><a class="pillbtn" id="dashBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg><span>Dashboard</span></a><span class="live"><i></i>LIVE · Google Sheet</span></div>
+<div class="top"><button class="pillbtn" id="homeBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></button><div class="ttl"><b>National Assessments <span id="modeLbl">Pretest</span><span id="lvLbl"></span></b><small>SDO Romblon · Curriculum Implementation Division</small></div><button class="pillbtn" id="dashBtn" type="button" title="Live results (facilitator PIN)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg><span>Dashboard</span></button><a class="live" id="sheetBtn" href="#" target="_blank" rel="noopener" title="Open the Google Sheet"><i></i>LIVE · Google Sheet</a></div>
 
 <div id="bar" class="bar hide"><div class="in"><span id="pc">1/20</span><div class="prog"><div id="pb"></div></div><span id="timer">25:00</span></div></div>
 
@@ -97,9 +116,15 @@ button:disabled{opacity:.5;cursor:not-allowed}
 </section>
 </main>
 
+<div id="dash" class="hide"><div class="dw">
+ <div id="dlock" class="card dlock"><span class="pill">FACILITATOR ONLY</span><h2 style="margin-top:12px">Live results</h2><p class="msg">Enter the facilitator PIN to see the results as participants submit.</p><input id="dpin" type="password" inputmode="numeric" autocomplete="off"><p class="msg" id="derr" style="color:var(--coral)"></p><button id="dgo" type="button">View results</button></div>
+ <div id="dbody" class="hide"></div>
+</div></div>
+
 <script>
 // ===== SETTINGS =====
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbx8HwE2Jwr5WdIsdvu2YWxvpXdx5Ip8jAq4-UH-tn9kX5qLE9jR_WT9t6mFL6p9yShNmw/exec";   // paste your Google Apps Script web app URL here (see SETUP.txt)
+const SHEET_URL = "";   // paste the link of your Google Sheet here so the LIVE · Google Sheet badge opens it
 const MINUTES = 25;
 const CODES = {Elementary:"ELEM-2026", Secondary:"SEC-2026"};   // CHANGE THESE: access codes for each level
 const MODE = new URLSearchParams(location.search).get("mode")==="post" ? "Posttest" : "Pretest";
@@ -156,8 +181,9 @@ function login(){
 $("nx1").onclick=()=>step(2);$("bk1").onclick=()=>step(1);$("nx2").onclick=login;$("bk2").onclick=()=>step(2);
 $("code").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 (function(){const q=(new URLSearchParams(location.search).get("level")||"").toLowerCase();if(q==="elementary")pick("Elementary");if(q==="secondary")pick("Secondary")})();
-if(ENDPOINT){$("dashBtn").href=ENDPOINT+(ENDPOINT.indexOf("?")>-1?"&":"?")+"page=results"}else $("dashBtn").style.display="none";
-$("homeBtn").onclick=()=>{if(tick&&!done){if(!confirm("Leave the test? Your answers will be lost."))return;done=true;clearInterval(tick)}location.href=location.pathname+(MODE==="Posttest"?"?mode=post":"")};
+
+if(SHEET_URL){$("sheetBtn").href=SHEET_URL}else{$("sheetBtn").onclick=e=>{e.preventDefault();alert("Paste the Google Sheet link in SHEET_URL (index.html) to open it from here.")};$("sheetBtn").style.cursor="default"}
+$("homeBtn").onclick=()=>{if(!$("dash").classList.contains("hide")){showView("test");return}if(tick&&!done){if(!confirm("Leave the test? Your answers will be lost."))return;done=true;clearInterval(tick)}location.href=location.pathname+(MODE==="Posttest"?"?mode=post":"")};
 (function(){let x0=null,y0=null;const el=$("intro");
  el.addEventListener("touchstart",e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
  el.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
@@ -208,5 +234,146 @@ $("home").onclick=()=>location.href=location.pathname+(MODE==="Posttest"?"?mode=
 $("csv").onclick=()=>{const k=Object.keys(out);const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
  const blob=new Blob([k.join(",")+"\n"+k.map(x=>q(out[x])).join(",")],{type:"text/csv"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=MODE+"_"+(info.name||"result").replace(/\W+/g,"_")+".csv";a.click()};
+
+// ===== LIVE DASHBOARD (inside this page, like the NAT G12 test) =====
+const PASS=75, DASH_REFRESH_SEC=10;
+const LAB=["BEA full name","DO 55, s. 2016 as policy","Which result changes learner status","Who may register for PEPT","PEPT: below 75% in one subject","PEPT placement timing","PEPT registration rules","NAT grade levels","What NAT results show","ELLNA reporting","ELLNA languages","CB-NCAE purpose","CB-NCAE CORE-A model","CB-NCAE passing score","What PBTS is","PISA learners","PISA domains","SEA-PLM grade level","Stakes lens: ELLNA and NAT","“High-stakes” as a teaching lens"];
+const TOP={"Framework and policy":[1,2],"PEPT":[4,5,6,7],"NAT":[8,9],"ELLNA":[10,11],"CB-NCAE":[12,13,14],"PBTS, PISA, SEA-PLM":[15,16,17,18],"Stakes lens":[3,19,20]};
+const DISTRICTS=["Alcantara","Banton","Cajidiocan-Magdiwang","Concepcion","Corcuera","Looc","Odiongan North","Odiongan South","Romblon","San Agustin-Santa Maria-Calatrava","San Andres","San Fernando","San Jose-Santa Fe","Division Office / Other"];
+let DPIN="",ALL=[],LV="Combined",dloaded=false,dsig="",dstamp="";
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const f=x=>x==null?"–":Math.round(x)+"%";
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function dparse(r){const m={};String(r.items||"").split(",").forEach(p=>{const [i,v]=p.split(":");if(i)m[+i]=+v});
+ let lv=String(r.level||"");lv=/^sec/i.test(lv)?"Secondary":/^elem/i.test(lv)?"Elementary":(/(NHS|NTS|AHS|\bHS|Senior High School)$/.test(String(r.school||""))?"Secondary":"Elementary");
+ return {...r,pct:+r.percent,m,lv}}
+function itemPct(set,i){const a=set.filter(r=>i in r.m).map(r=>r.m[i]);return a.length?avg(a)*100:null}
+function topPct(set,ids){const a=[];set.forEach(r=>ids.forEach(i=>{if(i in r.m)a.push(r.m[i])}));return a.length?avg(a)*100:null}
+function showView(v){const d=v==="dash";$("dash").classList.toggle("hide",!d);document.querySelector("main").classList.toggle("hide",d);
+ $("bar").classList.toggle("hide",d||!(tick&&!done));window.scrollTo(0,0);if(d&&!DPIN)setTimeout(()=>$("dpin").focus(),50)}
+function dfetch(ok,fail){
+ const cb="jp"+Date.now()+Math.floor(Math.random()*1000);const sc=document.createElement("script");
+ const done=()=>{clearTimeout(t);delete window[cb];sc.remove()};
+ const t=setTimeout(()=>{done();fail("Timed out")},15000);
+ window[cb]=x=>{done();ok(x)};sc.onerror=()=>{done();fail("Could not reach the Google Sheet service")};
+ sc.src=ENDPOINT+(ENDPOINT.indexOf("?")>-1?"&":"?")+"action=data&pin="+encodeURIComponent(DPIN)+"&callback="+cb+"&_="+Date.now();
+ document.head.appendChild(sc)}
+function dload(force){
+ if(!DPIN)return;
+ dfetch(x=>{
+  if(!x||!x.ok){if(!dloaded){$("dlock").classList.remove("hide");$("dbody").classList.add("hide");$("derr").textContent=(x&&x.error)||"Could not load.";DPIN=""}else{$("dstamp")&&($("dstamp").textContent="reconnecting…")}return}
+  dloaded=true;$("dlock").classList.add("hide");$("dbody").classList.remove("hide");dstamp=new Date().toLocaleTimeString();
+  ALL=(x.rows||[]).map(dparse);const sig=ALL.length+"|"+LV;
+  if(!force&&sig===dsig){const e=$("dstamp");if(e)e.textContent=dstamp;return}dsig=sig;drender()},
+  m=>{if(!dloaded){$("derr").textContent=m}else{const e=$("dstamp");if(e)e.textContent="reconnecting…"}});
+}
+function partRows(){
+ const cnt=(m,l,d)=>ALL.filter(r=>r.mode===m&&r.lv===l&&(d==null||r.district===d)).length;
+ const extra=[...new Set(ALL.map(r=>r.district))].filter(d=>d&&DISTRICTS.indexOf(d)<0);
+ return {cnt,part:DISTRICTS.concat(extra).map(d=>({d,e:cnt("Pretest","Elementary",d),s:cnt("Pretest","Secondary",d)}))}}
+const bar2=(list,cls)=>list.map(x=>`<div class="br ${cls||""}"><div class="nm" title="${esc(x.n)}">${esc(x.n)}</div><div class="t"><i class="a" style="width:${x.a||0}%"></i>${x.b!=null?`<i class="b" style="width:${x.b||0}%"></i>`:""}</div><div class="v">${f(x.b!=null?x.b:x.a)}</div></div>`).join("")||'<p class="msg">No data yet.</p>';
+function drender(){
+ const rows=LV==="Combined"?ALL:ALL.filter(r=>r.lv===LV);
+ const P=rows.filter(r=>r.mode==="Pretest"),Q=rows.filter(r=>r.mode==="Posttest"),pm=avg(P.map(r=>r.pct)),qm=avg(Q.map(r=>r.pct));
+ const key=r=>(r.name+"|"+r.school).toLowerCase();const qmap={};Q.forEach(r=>qmap[key(r)]=r);
+ const pairs=P.filter(r=>qmap[key(r)]);const gain=pairs.length?avg(pairs.map(r=>qmap[key(r)].pct-r.pct)):null;
+ const tops=Object.entries(TOP).map(([n,ids])=>({n,a:topPct(P,ids),b:Q.length?topPct(Q,ids):null}));
+ const dist=[...new Set(rows.map(r=>r.district))].sort().map(n=>{const a=P.filter(r=>r.district===n),b=Q.filter(r=>r.district===n);return {n:`${n} (${a.length})`,a:avg(a.map(r=>r.pct)),b:b.length?avg(b.map(r=>r.pct)):null,cnt:a.length}});
+ const itm=LAB.map((l,i)=>({n:l,a:itemPct(P,i+1)})).filter(x=>x.a!=null).sort((x,y)=>x.a-y.a);
+ const bands=[["0–39",0,39],["40–59",40,59],["60–74",60,74],["75–89",75,89],["90–100",90,100]].map(([l,a,b])=>({l,c:P.filter(r=>r.pct>=a&&r.pct<=b).length}));
+ const mx=Math.max(1,...bands.map(b=>b.c));
+ const roles=[...new Set(P.map(r=>r.role))].map(n=>{const a=P.filter(r=>r.role===n);return {n:`${n} (${a.length})`,a:avg(a.map(r=>r.pct))}});
+ const weak=tops.filter(t=>t.a!=null).sort((x,y)=>x.a-y.a);const below=P.filter(r=>r.pct<PASS).length;
+ const pe=ALL.filter(r=>r.mode==="Pretest"&&r.lv==="Elementary"),ps=ALL.filter(r=>r.mode==="Pretest"&&r.lv==="Secondary");
+ const cmp=[{n:"Overall mean",a:avg(pe.map(r=>r.pct)),b:avg(ps.map(r=>r.pct))}].concat(Object.entries(TOP).map(([n,ids])=>({n,a:topPct(pe,ids),b:topPct(ps,ids)})));
+ const {cnt,part}=partRows();const hasPost=Q.length>0,isC=LV==="Combined";const LVL=isC?"ALL LEVELS":LV.toUpperCase();
+ window.__D={P,Q,pm,qm,gain,pairs,tops,dist,items:itm,bands,roles,weak,below,hasPost,part,cmp,pe,ps,isC,LVL,cnt};
+ const cE=cnt("Pretest","Elementary"),cS=cnt("Pretest","Secondary"),cPost=ALL.filter(r=>r.mode==="Posttest").length;
+ const tabs=["Elementary","Secondary","Combined"].map(l=>`<button type="button" data-lv="${l}" class="${l===LV?"on":""}">${l}</button>`).join("");
+ $("dbody").innerHTML=`
+ <div class="dt"><div class="tabs">${tabs}</div><div class="chips">Pretest · Elementary <b>${cE}</b> · Secondary <b>${cS}</b> · Total <b>${cE+cS}</b>${cPost?` · Posttest <b>${cPost}</b>`:""} · updated <span id="dstamp">${dstamp}</span></div></div>
+ <div class="dt"><button type="button" data-act="ppt">Download PowerPoint</button><button type="button" class="alt" data-act="refresh">Refresh now</button><span class="msg">Updates by itself every ${DASH_REFRESH_SEC} seconds.</span></div>
+ <div class="kpis"><div class="kpi"><div class="n">${P.length}</div><div class="l">Pretest takers${isC?"":" · "+LV}</div></div><div class="kpi"><div class="n">${f(pm)}</div><div class="l">Mean pretest score</div></div><div class="kpi"><div class="n">${hasPost?f(qm):"–"}</div><div class="l">Mean posttest score</div></div><div class="kpi"><div class="n">${gain==null?"–":(gain>=0?"+":"")+Math.round(gain)}</div><div class="l">Average gain, points (${pairs.length} matched)</div></div></div>
+ <div class="card"><h2>Who has taken the test so far</h2><table class="pt"><tr><th>PRETEST BY DISTRICT</th><th>Elementary</th><th>Secondary</th><th>Total</th></tr>${part.map(p=>`<tr><td>${esc(p.d)}</td><td class="${p.e?"":"z"}">${p.e}</td><td class="${p.s?"":"z"}">${p.s}</td><td><b>${p.e+p.s}</b></td></tr>`).join("")}</table><p class="msg" style="margin-top:8px">Red zero means nobody from that district has submitted yet. Always shows both levels.</p></div>
+ <div class="card"><h2>${weak.length?`Weakest area: ${esc(weak[0].n)} (${f(weak[0].a)}). Strongest: ${esc(weak[weak.length-1].n)} (${f(weak[weak.length-1].a)}).`:"Results by area"}</h2><p class="msg">${below} of ${P.length} participants (${P.length?Math.round(below/P.length*100):0}%) scored below the ${PASS}% mastery line at pretest.</p><div class="leg"><span><i style="background:#9DB6D3"></i>Pretest</span><span><i style="background:var(--teal)"></i>Posttest</span></div>${bar2(tops)}</div>
+ <div class="g2"><div class="card"><h2>Items that need the most attention</h2><p class="msg">Lowest 6 (% correct)</p>${bar2(itm.slice(0,6),"one red")}</div><div class="card"><h2>Items answered best</h2><p class="msg">Highest 4 (% correct)</p>${bar2(itm.slice(-4).reverse(),"one grn")}</div></div>
+ <div class="card"><h2>Mean pretest score per district</h2><p class="msg">Number of participants in parentheses. Interpret small groups with care.</p>${bar2(dist.map(d=>({n:d.n,a:d.a})),"one")}</div>
+ <div class="g2"><div class="card"><h2>How scores are spread</h2><p class="msg">Pretest score bands (% of 20 items)</p><div class="hs">${bands.map(b=>`<div>${b.c}<b style="height:${b.c/mx*80}%"></b><span>${b.l}</span></div>`).join("")}</div></div><div class="card"><h2>By position</h2>${bar2(roles,"one")}</div></div>
+ ${isC?`<div class="card"><h2>Elementary vs Secondary</h2><p class="msg">Pretest by area. Elementary ${pe.length} participants · Secondary ${ps.length} participants.</p><div class="leg"><span><i style="background:#9DB6D3"></i>Elementary</span><span><i style="background:var(--teal)"></i>Secondary</span></div>${cmp.map(x=>`<div class="br cmpr"><div class="nm">${esc(x.n)}</div><div class="t"><i class="a" style="width:${x.a||0}%"></i><i class="b" style="width:${x.b||0}%"></i></div><div class="v">${f(x.a)} · ${f(x.b)}</div></div>`).join("")}</div>`:""}
+ <div class="card foc"><h2>What the results suggest</h2><ul><li>Spend the most discussion time on <b>${weak[0]?esc(weak[0].n):"–"}</b>${weak[1]?` and <b>${esc(weak[1].n)}</b>`:""}.</li><li>Re-teach the lowest-scoring items first: ${itm.slice(0,2).map(x=>"“"+esc(x.n)+"”").join("; ")||"–"}.</li><li>Give extra support to districts with the lowest mean scores.</li><li>Run the posttest with the same items to measure gain.</li></ul></div>`;
+}
+function ensurePpt(cb){if(window.PptxGenJS)return cb();const sc=document.createElement("script");sc.src="https://cdn.jsdelivr.net/npm/pptxgenjs@4.0.1/dist/pptxgen.bundle.js";sc.onload=cb;sc.onerror=()=>alert("Could not load the PowerPoint maker. Check the internet and try again.");document.head.appendChild(sc)}
+$("dbody").addEventListener("click",e=>{const l=e.target.closest("[data-lv]");if(l){LV=l.dataset.lv;dsig="";drender();return}
+ const a=e.target.closest("[data-act]");if(!a)return;if(a.dataset.act==="refresh")dload(true);if(a.dataset.act==="ppt")ensurePpt(()=>makePPT())});
+$("dashBtn").onclick=()=>showView("dash");
+function dunlock(){DPIN=$("dpin").value.trim();$("derr").textContent="";dloaded=false;dload(true)}
+$("dgo").onclick=dunlock;$("dpin").addEventListener("keydown",e=>{if(e.key==="Enter")dunlock()});
+setInterval(()=>{if(DPIN&&!$("dash").classList.contains("hide"))dload()},DASH_REFRESH_SEC*1000);
+function makePPT(){
+ const D=window.__D;if(!D||!D.P.length){alert("No results yet for this tab.");return}
+ const X=new PptxGenJS();X.layout="LAYOUT_WIDE";X.title="National Assessments Results";
+ const NAVY="0E2747",GOLD="F2B63D",BLUE="1F5FA6",TEAL="17776E",MUTE="5B6A7E",PAPER="F6F5F0",FONT="Calibri";
+ const r0=x=>x==null?0:Math.round(x);
+ const foot=(s,dark)=>s.addText("SDO Romblon · Curriculum Implementation Division",{x:0.6,y:7.0,w:8,h:0.3,fontSize:11,color:dark?"A9BBD3":MUTE,fontFace:FONT});
+ const head=(s,eb,t,dark)=>{s.addText(eb,{x:0.6,y:0.4,w:12,h:0.35,fontSize:13,bold:true,charSpacing:3,color:dark?GOLD:BLUE,fontFace:FONT});
+  s.addText(t,{x:0.6,y:0.8,w:12.1,h:1.1,fontSize:30,bold:true,color:dark?"FFFFFF":NAVY,fontFace:FONT,valign:"top"})};
+ const chartOpts=(extra)=>Object.assign({x:0.6,y:2.1,w:12.1,h:4.7,barDir:"bar",catAxisLabelFontSize:14,valAxisLabelFontSize:12,valAxisMinVal:0,valAxisMaxVal:100,showValue:true,dataLabelFontSize:12,dataLabelFormatCode:'0"%"',showLegend:false,catAxisOrientation:"maxMin",valGridLine:{color:"E1E6EC",size:0.5}},extra||{});
+ let s=X.addSlide();s.background={color:NAVY};
+ s.addText("NATIONAL ASSESSMENTS TRAINING · RESULTS · "+D.LVL,{x:0.6,y:0.8,w:12,h:0.4,fontSize:14,bold:true,charSpacing:3,color:GOLD,fontFace:FONT});
+ s.addText("Where we stand, and where to focus",{x:0.6,y:1.3,w:12,h:1.4,fontSize:44,bold:true,color:"FFFFFF",fontFace:FONT});
+ s.addText(`Diagnostic of ${D.P.length} ${D.isC?"":LV+" "}participants across ${D.dist.length} districts`+(D.hasPost?`; posttest from ${D.Q.length}`:""),{x:0.6,y:2.8,w:12,h:0.5,fontSize:18,color:"C9D6E8",fontFace:FONT});
+ const K=[[String(D.P.length),"Pretest takers"],[r0(D.pm)+"%","Mean pretest score"],[D.hasPost?r0(D.qm)+"%":"–","Mean posttest score"],[D.gain==null?"–":(D.gain>=0?"+":"")+r0(D.gain),`Average gain, points (${D.pairs.length} matched)`]];
+ K.forEach((k,j)=>{const x=0.6+j*3.05;s.addShape(X.ShapeType.roundRect,{x,y:3.8,w:2.85,h:2.2,fill:{color:"17375F"},line:{color:"2B4C78",width:1},rectRadius:0.15});
+  s.addText(k[0],{x,y:3.95,w:2.85,h:1.1,fontSize:48,bold:true,color:GOLD,align:"center",fontFace:FONT});
+  s.addText(k[1],{x:x+0.15,y:5.0,w:2.55,h:0.8,fontSize:13,color:"C9D6E8",align:"center",fontFace:FONT,valign:"top"})});
+ foot(s,true);
+ // participation
+ s=X.addSlide();s.background={color:PAPER};head(s,"PARTICIPATION · ALL LEVELS","Who has taken the test so far");
+ const hd=(t)=>({text:t,options:{bold:true,color:"FFFFFF",fill:{color:NAVY},align:"center"}});
+ const tb=[[{text:"District",options:{bold:true,color:"FFFFFF",fill:{color:NAVY}}},hd("Elementary"),hd("Secondary"),hd("Total")]].concat(D.part.map(p=>[{text:p.d},{text:String(p.e),options:{align:"center",color:p.e?NAVY:"C73E1D"}},{text:String(p.s),options:{align:"center",color:p.s?NAVY:"C73E1D"}},{text:String(p.e+p.s),options:{align:"center",bold:true}}]));
+ s.addTable(tb,{x:0.6,y:1.8,w:7.6,colW:[3.7,1.3,1.3,1.3],rowH:0.3,fontSize:12,fontFace:FONT,color:NAVY,border:{type:"solid",color:"CAD3DD",pt:0.5},valign:"middle"});
+ [["Elementary · Pretest",D.cnt("Pretest","Elementary")],["Secondary · Pretest",D.cnt("Pretest","Secondary")],["Elementary · Posttest",D.cnt("Posttest","Elementary")],["Secondary · Posttest",D.cnt("Posttest","Secondary")]].forEach((k,j)=>{
+  const x=8.7+(j%2)*2.2,y=1.8+Math.floor(j/2)*2.0;s.addShape(X.ShapeType.roundRect,{x,y,w:2.0,h:1.8,fill:{color:"FFFFFF"},line:{color:"CAD3DD",width:1},rectRadius:0.12});
+  s.addText(String(k[1]),{x,y:y+0.15,w:2.0,h:0.9,fontSize:40,bold:true,color:j%2?TEAL:BLUE,align:"center",fontFace:FONT});
+  s.addText(k[0],{x:x+0.1,y:y+1.05,w:1.8,h:0.6,fontSize:12,color:MUTE,align:"center",fontFace:FONT,valign:"top"})});
+ foot(s);
+ s=X.addSlide();s.background={color:PAPER};
+ const w=D.weak;head(s,"HEADLINE · "+D.LVL,w.length?`Weakest area: ${w[0].n} (${r0(w[0].a)}%). Strongest: ${w[w.length-1].n} (${r0(w[w.length-1].a)}%).`:"No data yet");
+ s.addText(`${D.below} of ${D.P.length} participants (${Math.round(D.below/D.P.length*100)}%) scored below the ${PASS}% mastery line at pretest.`,{x:0.6,y:1.9,w:12,h:0.4,fontSize:16,color:MUTE,fontFace:FONT});
+ const cats=D.tops.map(t=>t.n),ser=[{name:"Pretest",labels:cats,values:D.tops.map(t=>r0(t.a))}];
+ if(D.hasPost)ser.push({name:"Posttest",labels:cats,values:D.tops.map(t=>r0(t.b))});
+ s.addChart(X.charts.BAR,ser,chartOpts({y:2.5,h:4.35,chartColors:["9DB6D3",TEAL],showLegend:D.hasPost,legendPos:"b",legendFontSize:13}));foot(s);
+ s=X.addSlide();s.background={color:PAPER};head(s,"BY DISTRICT · "+D.LVL,"Mean pretest score per district");
+ s.addText("Number of participants in parentheses. Interpret small groups with care.",{x:0.6,y:1.7,w:12,h:0.4,fontSize:16,color:MUTE,fontFace:FONT});
+ s.addChart(X.charts.BAR,[{name:"Pretest",labels:D.dist.map(d=>d.n),values:D.dist.map(d=>r0(d.a))}],chartOpts({y:2.3,h:4.5,chartColors:[BLUE]}));foot(s);
+ s=X.addSlide();s.background={color:PAPER};head(s,"ITEM ANALYSIS · "+D.LVL,"Items that need the most attention");
+ const low=D.items.slice(0,6),hi=D.items.slice(-4).reverse();
+ s.addText("Lowest 6 (% correct)",{x:0.6,y:1.9,w:6,h:0.4,fontSize:16,bold:true,color:NAVY,fontFace:FONT});
+ s.addChart(X.charts.BAR,[{name:"Pretest",labels:low.map(x=>x.n),values:low.map(x=>r0(x.a))}],chartOpts({x:0.5,y:2.3,w:6.3,h:4.5,chartColors:["C73E1D"],catAxisLabelFontSize:11}));
+ s.addText("Highest 4 (% correct)",{x:6.9,y:1.9,w:6,h:0.4,fontSize:16,bold:true,color:NAVY,fontFace:FONT});
+ s.addChart(X.charts.BAR,[{name:"Pretest",labels:hi.map(x=>x.n),values:hi.map(x=>r0(x.a))}],chartOpts({x:6.8,y:2.3,w:6.1,h:4.5,chartColors:[TEAL],catAxisLabelFontSize:11}));foot(s);
+ s=X.addSlide();s.background={color:PAPER};head(s,"DISTRIBUTION · "+D.LVL,"How scores are spread");
+ s.addText("Pretest score bands (% of 20 items)",{x:0.6,y:1.9,w:6,h:0.4,fontSize:16,bold:true,color:NAVY,fontFace:FONT});
+ s.addChart(X.charts.BAR,[{name:"Participants",labels:D.bands.map(b=>b.l),values:D.bands.map(b=>b.c)}],chartOpts({x:0.5,y:2.3,w:6.3,h:4.5,barDir:"col",catAxisOrientation:"minMax",valAxisMaxVal:undefined,dataLabelFormatCode:"0",chartColors:[BLUE]}));
+ s.addText("Mean pretest by position",{x:6.9,y:1.9,w:6,h:0.4,fontSize:16,bold:true,color:NAVY,fontFace:FONT});
+ s.addChart(X.charts.BAR,[{name:"Pretest",labels:D.roles.map(x=>x.n),values:D.roles.map(x=>r0(x.a))}],chartOpts({x:6.8,y:2.3,w:6.1,h:4.5,chartColors:[BLUE]}));foot(s);
+ if(D.hasPost){s=X.addSlide();s.background={color:PAPER};
+  head(s,"LEARNING GAIN · "+D.LVL,D.gain==null?"Posttest in progress":`Matched participants improved by ${r0(D.gain)} points on average`);
+  s.addText(`${D.pairs.length} participants have both a pretest and a posttest.`,{x:0.6,y:1.7,w:12,h:0.4,fontSize:16,color:MUTE,fontFace:FONT});
+  s.addChart(X.charts.BAR,ser,chartOpts({y:2.3,h:4.5,chartColors:["9DB6D3",TEAL],showLegend:true,legendPos:"b",legendFontSize:13}));foot(s)}
+ if(D.isC){s=X.addSlide();s.background={color:PAPER};head(s,"ELEMENTARY vs SECONDARY","Pretest by area, side by side");
+  s.addText(`Elementary ${D.pe.length} participants · Secondary ${D.ps.length} participants.`,{x:0.6,y:1.7,w:12,h:0.4,fontSize:16,color:MUTE,fontFace:FONT});
+  const cc=D.cmp.map(c=>c.n);
+  s.addChart(X.charts.BAR,[{name:"Elementary",labels:cc,values:D.cmp.map(c=>r0(c.a))},{name:"Secondary",labels:cc,values:D.cmp.map(c=>r0(c.b))}],chartOpts({y:2.3,h:4.5,chartColors:["9DB6D3",TEAL],showLegend:true,legendPos:"b",legendFontSize:13}));foot(s)}
+ s=X.addSlide();s.background={color:NAVY};head(s,"RECOMMENDATIONS · "+D.LVL,"What the results suggest",true);
+ const rec=[`Spend the most discussion time on ${w[0]?w[0].n:"–"}`+(w[1]?` and ${w[1].n}`:"")+".",
+  "Re-teach the lowest-scoring items first: "+(D.items.slice(0,2).map(x=>"“"+x.n+"”").join("; ")||"–")+".",
+  "Give extra support to districts with the lowest mean scores.","Run the posttest with the same items to measure gain.",
+  "Before acting, confirm flagged facts (ELLNA grade level, CB-NCAE schedule) with the latest BEA memos."];
+ s.addText(rec.map(t=>({text:t,options:{bullet:true,breakLine:true}})),{x:0.8,y:2.0,w:11.6,h:4.4,fontSize:22,color:"FFFFFF",fontFace:FONT,paraSpaceAfter:14,valign:"top"});
+ foot(s,true);
+ X.writeFile({fileName:"National_Assessments_Results_"+LV+"_"+new Date().toISOString().slice(0,10)+".pptx"});
+}
+
 window.addEventListener("beforeunload",e=>{if(tick&&!done){e.preventDefault();e.returnValue=""}});
 </script></body></html>
